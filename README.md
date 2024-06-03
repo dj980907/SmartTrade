@@ -32,3 +32,17 @@ this is what stock price data looks like:
 | Close | text |
 
 the stock price will be pointing to the stock data table, which means that stockID will have a foreign key of stock data
+
+run the command:
+
+```
+sqlite3 app.db
+```
+
+```
+CREATE TABLE IF NOT EXISTS stock (
+    id INTEGER PRIMARY KEY
+    symbol TEXT NOT NULL UNIQUE
+    company TEXT NOT NULL
+)
+```
