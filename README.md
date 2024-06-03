@@ -10,3 +10,11 @@ this is what stock data looks like:
 | ID | primary |
 | Symbol | text |
 | Company | text |
+
+for example,
+
+| key | Description |
+| --- | --- |
+| ID | 1 |
+| Symbol | APPL |
+| Company | APPLE INC |
