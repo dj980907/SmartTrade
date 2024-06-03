@@ -72,7 +72,8 @@ CREATE TABLE IF NOT EXISTS stock_price (
 
 to insert datas,
 
-use the following: INSERT INTO table_name (column_names) VALUES (actual_values_of_columns)
+use the following: 
+INSERT INTO table_name (column_names) VALUES (actual_values_of_columns)
 
 for example,
 
