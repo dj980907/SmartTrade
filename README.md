@@ -96,3 +96,18 @@ for example,
 SELECT * from stock;
 ```
 
+to update the data, use this:
+
+UPDATE {{table_name}} SET {{column_you_want_to_update}} = '{value}' WHERE {{condition}};
+
+```
+UPDATE stock SET company = 'Apple INC.' WHERE id = 1;
+```
+
+to de3lete the data, use this:
+
+DELETE FROM {{table_name}} where {{condition}};
+
+```
+DELETE FROM stock where id = 3;
+```
