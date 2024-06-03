@@ -73,7 +73,8 @@ CREATE TABLE IF NOT EXISTS stock_price (
 to insert datas,
 
 use the following: 
-INSERT INTO table_name (column_names) VALUES (actual_values_of_columns)
+
+INSERT INTO {{table_name}} ({{column_names}}) VALUES ({{actual_values_of_columns}})
 
 for example,
 
@@ -83,8 +84,15 @@ INSERT INTO stock (symbol, company) VALUES ('AAPL', 'Apple');
 
 
 
-to read the data from sql database, use this:
+to read the datas from sql database, use this:
+
+
+SELECT {{what_you_want_to_read}} from {{table}}
+
+
+for example,
 
 ```
 SELECT * from stock;
 ```
+
