@@ -24,10 +24,12 @@ cursor = connection.cursor()
 # # delete the database
 # cursor.execute("DELETE FROM stock")
 
+# connect to Alpaca API
 api = tradeapi.REST(os.getenv("API_KEY"), os.getenv("SECRET_KEY"), os.getenv("BASE_URL"))
+# save the assets
 assets = api.list_assets()
 
-# insert the stock data into the database
+# go through each asset and insert it into our database
 for asset in assets:
     try:
         if asset.status == 'active' and asset.tradable:
@@ -35,5 +37,6 @@ for asset in assets:
     except Exception as e:
         print(asset.symbol)
         print(e)
+
 # commit
 connection.commit()
