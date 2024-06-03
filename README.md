@@ -31,4 +31,4 @@ this is what stock price data looks like:
 | Low | text |
 | Close | text |
 
-the stock price 
+the stock price will be pointing to the stock data table, which means that stockID will have a foreign key of stock data
