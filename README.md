@@ -19,13 +19,16 @@ for example,
 | Symbol | APPL |
 | Company | APPLE INC |
 
-| key | Description |
-| :---: | :---: |
-| ID | primary |
-| Symbol | text |
-| Company | text |
+this is what stock price data looks like:
 
-   ↓
 | key | Description |
 | :---: | :---: |
-| ID | primary |
+| ID | Primary |
+| Stock_ID | Foreign Key |
+| Date | text |
+| Open | text |
+| High | text |
+| Low | text |
+| Close | text |
+
+the stock price 
