@@ -1,4 +1,14 @@
+# import sqlite3 for sql database
 import sqlite3
+# import alpaca api for trading
+import alpaca_trade_api as tradeapi
+# import os modul;e for environment variables
+import os
+# import necessary functions from dotenv library
+from dotenv import load_dotenv, dotenv_values
+
+# load variables from .env file
+load_dotenv()
 
 # connect to the database
 connection = sqlite3.connect('app.db')
@@ -13,6 +23,12 @@ cursor = connection.cursor()
 
 # # delete the database
 # cursor.execute("DELETE FROM stock")
+
+api = tradeapi.REST(os.getenv("API_KEY"), os.getenv("SECRET_KEY"), os.getenv("BASE_URL"))
+assets = api.list_assets()
+
+for asset in assets:
+    print(asset.name)
 
 # commit
 connection.commit()
