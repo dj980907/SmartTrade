@@ -27,8 +27,13 @@ cursor = connection.cursor()
 api = tradeapi.REST(os.getenv("API_KEY"), os.getenv("SECRET_KEY"), os.getenv("BASE_URL"))
 assets = api.list_assets()
 
+# insert the stock data into the database
 for asset in assets:
-    print(asset.name)
-
+    try:
+        if asset.status == 'active' and asset.tradable:
+            cursor.execute("INSERT INTO stock (symbol, company) VALUES (?, ?)", (asset.symbol, asset.name))
+    except Exception as e:
+        print(asset.symbol)
+        print(e)
 # commit
 connection.commit()
