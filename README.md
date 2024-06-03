@@ -18,3 +18,14 @@ for example,
 | ID | 1 |
 | Symbol | APPL |
 | Company | APPLE INC |
+
+| key | Description |
+| :---: | :---: |
+| ID | primary |
+| Symbol | text |
+| Company | text |
+
+   ↓
+| key | Description |
+| :---: | :---: |
+| ID | primary |
