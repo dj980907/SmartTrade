@@ -3,15 +3,10 @@
 ## how i design the database
 i will ahve relational data base.
 
------------------------------
-|          stock            |<br>
------------------------------
-|     ID: primary           |<br>
-|     Symbol: Test          |<br>
-|     Company: text         |<br>
------------------------------
+this is what stock data looks like:
 
-| Command | Description |
+| key | Description |
 | --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
+| ID | primary |
+| Symbol | text |
+| Company | text |
