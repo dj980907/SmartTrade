@@ -111,3 +111,10 @@ DELETE FROM {{table_name}} where {{condition}};
 ```
 DELETE FROM stock where id = 3;
 ```
+
+
+
+
+### API
+i am going to use Alpaca API.
+
