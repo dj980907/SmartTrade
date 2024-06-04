@@ -1,14 +1,7 @@
-# import sqlite3 for sql database
-import sqlite3
+# import sqlite3, config for sql database
+import sqlite3, config
 # import alpaca api for trading
 import alpaca_trade_api as tradeapi
-# import os modul;e for environment variables
-import os
-# import necessary functions from dotenv library
-from dotenv import load_dotenv, dotenv_values
-
-# load variables from .env file
-load_dotenv()
 
 # connect to the database
 connection = sqlite3.connect('/Users/dongjoolee/Desktop/SmartTrade/app.db')
@@ -29,7 +22,7 @@ rows = cursor.fetchall()
 symbols = [row['symbol'] for row in rows]
 
 # connect to Alpaca API
-api = tradeapi.REST(os.getenv("API_KEY"), os.getenv("SECRET_KEY"), os.getenv("BASE_URL"))
+api = tradeapi.REST(config.API_Key, config.SECRET_KEY, config.BASE_URL)
 
 # save the assets
 assets = api.list_assets()
