@@ -11,7 +11,7 @@ from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 
 # connect to the database
-connection = sqlite3.connect('app.db')
+connection = sqlite3.connect('/Users/dongjoolee/Desktop/SmartTrade/app.db')
 connection.row_factory = sqlite3.Row
 
 # create a cursor
