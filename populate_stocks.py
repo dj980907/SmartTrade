@@ -12,7 +12,7 @@ cursor = connection.cursor()
 
 # get all the companies that we have in the database
 cursor.execute("""
-    SELECT symbol, company FROM stock
+    SELECT symbol, name FROM stock
 """)
 
 # fetch all the datas and store them in rows
@@ -22,7 +22,7 @@ rows = cursor.fetchall()
 symbols = [row['symbol'] for row in rows]
 
 # connect to Alpaca API
-api = tradeapi.REST(config.API_Key, config.SECRET_KEY, config.BASE_URL)
+api = tradeapi.REST(config.API_KEY, config.SECRET_KEY, config.BASE_URL)
 
 # save the assets
 assets = api.list_assets()
@@ -35,7 +35,7 @@ for asset in assets:
             # print the stock
             print(f"Added a new stock {asset.symbol, asset.name}")
             # add it to the database
-            cursor.execute("INSERT INTO stock (symbol, company) VALUES (?, ?)", (asset.symbol, asset.name))
+            cursor.execute("INSERT INTO stock (symbol, name) VALUES (?, ?)", (asset.symbol, asset.name))
     except Exception as e:
         # print the symbol of the stock that gave me the error
         print(asset.symbol)
