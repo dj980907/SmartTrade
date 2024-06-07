@@ -40,7 +40,7 @@ api = tradeapi.REST(config.API_KEY, config.SECRET_KEY, config.BASE_URL)
 # Calculate the date range
 end_date = datetime.today() - timedelta(days=1)
 # 120 days including the end date
-start_date = end_date - timedelta(days=120) 
+start_date = end_date - timedelta(days=90) 
 
 # Convert dates to strings in the format YYYY-MM-DD
 start_date_str = start_date.strftime('%Y-%m-%d')
