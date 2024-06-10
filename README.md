@@ -119,4 +119,21 @@ DELETE FROM stock where id = 3;
 i am going to use Alpaca API.
 
 
-finished part4 
+to check the stock prices are populated well, 
+```
+SELECT symbol,date,open,high,low,close
+FROM stock_price
+JOIN stock on stock.id = stock_price.stock_id
+WHERE symbol='AAPL'
+ORDER BY date;
+```
+
+
+to run the main.py
+```
+uvicorn main:app --reload
+```
+
+I am using Fast API and Semantic UI
+
+DOne with part 6
