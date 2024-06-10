@@ -18,9 +18,6 @@ cursor.execute("""
 # fetch all the datas and store them in rows
 rows = cursor.fetchall()
 
-# # create a symbols list
-# symbols = [row['symbol'] for row in rows]
-
 # create symbols list
 symbols = []
 # create stock dictionary
@@ -52,56 +49,38 @@ chunk_size = 200
 # loop through 
 for i in range(0, len(symbols), chunk_size):
 
-    symbol_chunk = symbols[i:i+chunk_size]
+    try:
+        symbol_chunk = symbols[i:i+chunk_size]
+        # print(symbol_chunk)
+        barsets = api.get_bars(symbol_chunk, tradeapi.TimeFrame.Day, start=start_date_str, end=end_date_str)
 
-    barsets = api.get_bars(symbol_chunk, tradeapi.TimeFrame.Day, start=start_date_str, end=end_date_str)
+        data_by_ticker = {}
 
-    data_by_ticker = {}
+        # Organize data by ticker
+        for bar in barsets:
+            ticker = bar.S
+            if ticker not in data_by_ticker:
+                data_by_ticker[ticker] = []
+            data_by_ticker[ticker].append(bar)
 
-    # Organize data by ticker
-    for bar in barsets:
-        ticker = bar.S
-        if ticker not in data_by_ticker:
-            data_by_ticker[ticker] = []
-        data_by_ticker[ticker].append(bar)
-
-        # Print data for each ticker
         for ticker, bars in data_by_ticker.items():
             try:
-                print(f"Data for {ticker}:")
+                print(f"Processing symbol {ticker}:")
                 for bar in bars:
-                    print(f"  Date: {bar.t}")
-                    print(f"    Open: {bar.o}")
-                    print(f"    High: {bar.h}")
-                    print(f"    Low: {bar.l}")
-                    print(f"    Close: {bar.c}")
-                    print(f"    Volume: {bar.v}")
-                    print(f"    VWAP: {bar.vw}")
-                    print(f"    Number of Trades: {bar.n}")
-                print("\n")
+                    stock_id = stock_dict[ticker]
+                    cursor.execute("""
+                        INSERT INTO stock_price (stock_id, date, open, high, low, close, volume)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """, (stock_id, bar.t.date(), bar.o, bar.h, bar.l, bar.c, bar.v))
+                    
             except Exception as e:
                 # print the symbol of the stock that gave me the error
                 print(ticker)
                 # print the error itself
                 print(e)
+    except Exception as e:
+                # print the error
+                print(e)
+                # as of now, LTC/USD is invalid symbol?
 
-
-
-
-
-
-    # for symbol in symbol_chunk:
-    #     # Fetch historical bar data for days
-    #     barsets = api.get_bars(
-    #         symbol, 
-    #         tradeapi.TimeFrame.Day, 
-    #         # start=start_date_str, 
-    #         # end=end_date_str
-    #     )
-
-    #     print(f"Processing symbol {symbol}")
-    #     # Loop over the results and print the data
-    #     for bar in barsets:
-    #         stock_id = stock_dict[symbol]
-    #         print(stock_id)
-    #         # print(bar.t, bar.o, bar.h, bar.l, bar.c, bar.v)
+connection.commit()
