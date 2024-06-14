@@ -81,6 +81,6 @@ for i in range(0, len(symbols), chunk_size):
     except Exception as e:
                 # print the error
                 print(e)
-                # as of now, LTC/USD is invalid symbol?
+                # as of now, LTC/USD , YFI/USDC is invalid symbol?
 
 connection.commit()
